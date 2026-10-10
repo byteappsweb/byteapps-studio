@@ -1,6 +1,18 @@
 # Prototype Instructions
 
+## Project location
+
+- The canonical checkout is `/Volumes/SSD/Codex/OfficialWebsite`. Keep the studio website source, assets, build configuration, and Git history together in this directory.
+- `/Volumes/SSD/Codex/ByteAppsStudio` is a compatibility symlink to the canonical checkout.
+
 ## Product direction
+
+- The website and local project name is ByteApps Studio. The support email is `support@byteapps.studio`. DeskWidgets links to `https://www.deskwidgets.com/` and Desktop Organizer links to `https://www.desktoporganizer.app/`.
+- Terms of Service (`/terms`), Privacy Policy (`/privacy`), and Refund Policy (`/refunds`) are studio-wide policies for all current and future ByteApps Studio apps. Use `support@byteapps.studio` consistently for every legal, privacy, refund, and support contact. Keep all three links accessible from the website footer and each policy page.
+- The site is now the ByteApps Studio portfolio rather than a single-product landing page. Lead with the independent studio and showcase DeskWidgets, Desktop Organizer, and Desktop for Gmail +Google Apps using real product imagery. Do not list ClearToday on the studio site.
+- Keep the public product split accurate: DeskWidgets, Desktop Organizer, and Desktop for Gmail +Google Apps are Mac apps.
+- Product screenshots must fill their visual frames edge to edge on desktop and mobile; do not add colored left or right gutters around the screenshots.
+- Use the current GmailMac product identity from the app project: the public name is `Desktop for Gmail +Google Apps`, and the website icon should be sourced from `Resources/Assets.xcassets/AppIcon.appiconset/icon_512x512@2x.png`.
 
 - The selected visual target is the bright, editorial Option 1: a crisp white Mac landing page with centered product messaging and layered native app windows.
 - Use the user-supplied red mail AppIcon as the only website brand icon, including navigation and favicon.
