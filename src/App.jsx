@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { LegalLinks, LegalPage, legalPages } from "./LegalPages.jsx";
+import { LegalLinks, LegalPage, legalPages, SUPPORT_EMAIL } from "./LegalPages.jsx";
 
 const products = [
   {
@@ -26,6 +26,11 @@ const products = [
 ];
 
 const Arrow = () => <span aria-hidden="true">↗</span>;
+
+function SupportLink() {
+  const href = `mailto:${SUPPORT_EMAIL}?subject=${encodeURIComponent("ByteApps Studio Support")}`;
+  return <a href={href} title={`Email ${SUPPORT_EMAIL}`}>Support</a>;
+}
 
 function Product({ product, index }) {
   const external = product.href.startsWith("http");
@@ -64,7 +69,7 @@ export function App({ pathname = typeof window === "undefined" ? "/" : window.lo
       <header className="topbar">
         <a className="wordmark" href={legalPage ? "/" : "#top"} aria-label="ByteApps Studio home">ByteApps <span>Studio</span></a>
         <nav className="topnav" aria-label="Main navigation">
-          <a href={legalPage ? "/#apps" : "#apps"}>Apps</a><a href={legalPage ? "/#studio" : "#studio"}>Studio</a><a href="mailto:support@byteapps.studio">Support</a>
+          <a href={legalPage ? "/#apps" : "#apps"}>Apps</a><a href={legalPage ? "/#studio" : "#studio"}>Studio</a><SupportLink />
         </nav>
       </header>
 
@@ -103,7 +108,7 @@ export function App({ pathname = typeof window === "undefined" ? "/" : window.lo
       <footer>
         <div><a className="wordmark wordmark--footer" href={legalPage ? "/" : "#top"}>ByteApps <span>Studio</span></a><p>Thoughtful apps for Mac.</p></div>
         <div className="footer-navigation">
-          <nav className="footer-links" aria-label="Studio links"><a href={legalPage ? "/#apps" : "#apps"}>Apps</a><a href="https://apps.apple.com/us/developer/shenzhen-chengsi-technology-co-ltd/id1675893924" target="_blank" rel="noreferrer">App Store</a><a href="mailto:support@byteapps.studio">Support</a></nav>
+          <nav className="footer-links" aria-label="Studio links"><a href={legalPage ? "/#apps" : "#apps"}>Apps</a><a href="https://apps.apple.com/us/developer/shenzhen-chengsi-technology-co-ltd/id1675893924" target="_blank" rel="noreferrer">App Store</a><SupportLink /></nav>
           <LegalLinks currentPath={currentPath} />
         </div>
         <p className="copyright">© 2026 Shenzhen Chengsi Technology Co., Ltd.</p>
