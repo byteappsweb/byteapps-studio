@@ -113,7 +113,7 @@ export function App({ pathname = typeof window === "undefined" ? "/" : window.lo
       <header className="topbar">
         <a className="wordmark" href={legalPage ? "/" : "#top"} aria-label="ByteApps Studio home">ByteApps <span>Studio</span></a>
         <nav className="topnav" aria-label="Main navigation">
-          <a href={legalPage ? "/#apps" : "#apps"}>Apps</a><a href={legalPage ? "/#studio" : "#studio"}>Studio</a><SupportLink onClick={openSupport} />
+          <a href={legalPage ? "/#apps" : "#apps"}>Apps</a><a className="nav-studio" href={legalPage ? "/#studio" : "#studio"}>Studio</a><SupportLink onClick={openSupport} />
         </nav>
       </header>
 
