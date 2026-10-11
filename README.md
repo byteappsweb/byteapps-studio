@@ -23,6 +23,14 @@ npm run build
 
 Cloudflare Pages output: `dist/client`
 
+## Production publishing
+
+The official website uses the Cloudflare Pages project `byteapps-studio` at https://byteapps.studio. Deployments use direct uploads:
+
+```bash
+npx wrangler pages deploy dist/client --project-name byteapps-studio --branch main
+```
+
 ## Links
 
 - Support: support@byteapps.studio

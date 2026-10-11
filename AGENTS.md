@@ -4,6 +4,7 @@
 
 - The canonical checkout is `/Volumes/SSD/Codex/OfficialWebsite`. Keep the studio website source, assets, build configuration, and Git history together in this directory.
 - `/Volumes/SSD/Codex/ByteAppsStudio` is a compatibility symlink to the canonical checkout.
+- Production hosting uses the Cloudflare Pages project `byteapps-studio`, serving `https://byteapps.studio`. Publish the studio website to that project.
 
 ## Product direction
 
