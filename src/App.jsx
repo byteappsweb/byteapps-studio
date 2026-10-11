@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useRef, useState } from "react";
 import { LegalLinks, LegalPage, legalPages, SUPPORT_EMAIL } from "./LegalPages.jsx";
 
 const products = [
@@ -26,10 +26,47 @@ const products = [
 ];
 
 const Arrow = () => <span aria-hidden="true">↗</span>;
+const SUPPORT_SUBJECT = "ByteApps Studio Support";
+const SUPPORT_MAILTO = `mailto:${SUPPORT_EMAIL}?subject=${encodeURIComponent(SUPPORT_SUBJECT)}`;
 
-function SupportLink() {
-  const href = `mailto:${SUPPORT_EMAIL}?subject=${encodeURIComponent("ByteApps Studio Support")}`;
-  return <a href={href} title={`Email ${SUPPORT_EMAIL}`}>Support</a>;
+function SupportLink({ onClick, children = "Support" }) {
+  return <a href={SUPPORT_MAILTO} onClick={onClick} title={`Email ${SUPPORT_EMAIL}`}>{children}</a>;
+}
+
+function SupportDialog({ dialogRef }) {
+  const [copyStatus, setCopyStatus] = useState("");
+  const gmail = `https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(SUPPORT_EMAIL)}&su=${encodeURIComponent(SUPPORT_SUBJECT)}`;
+  const outlook = `https://outlook.live.com/mail/0/deeplink/compose?to=${encodeURIComponent(SUPPORT_EMAIL)}&subject=${encodeURIComponent(SUPPORT_SUBJECT)}`;
+
+  async function copyEmail() {
+    try {
+      await navigator.clipboard.writeText(SUPPORT_EMAIL);
+      setCopyStatus("Email address copied.");
+    } catch {
+      setCopyStatus("Select the email address above and copy it.");
+    }
+  }
+
+  return (
+    <dialog ref={dialogRef} className="support-dialog" aria-labelledby="support-title" aria-describedby="support-description" onClose={() => setCopyStatus("")} onClick={(event) => {
+      if (event.target !== event.currentTarget) return;
+      const bounds = event.currentTarget.getBoundingClientRect();
+      if (event.clientX < bounds.left || event.clientX > bounds.right || event.clientY < bounds.top || event.clientY > bounds.bottom) event.currentTarget.close();
+    }}>
+      <button className="support-close" type="button" aria-label="Close support" onClick={() => dialogRef.current.close()}>×</button>
+      <p className="kicker">ByteApps Studio</p>
+      <h2 id="support-title">Here to help.</h2>
+      <p id="support-description">If your mail app didn't open, email us using one of the options below.</p>
+      <a className="support-address" href={SUPPORT_MAILTO}>{SUPPORT_EMAIL}</a>
+      <div className="support-actions">
+        <a className="support-primary" href={SUPPORT_MAILTO}>Open mail app <Arrow /></a>
+        <a href={gmail} target="_blank" rel="noopener noreferrer">Use Gmail <Arrow /></a>
+        <a href={outlook} target="_blank" rel="noopener noreferrer">Use Outlook <Arrow /></a>
+        <button type="button" onClick={copyEmail}>Copy email address</button>
+      </div>
+      <p className="support-status" role="status">{copyStatus}</p>
+    </dialog>
+  );
 }
 
 function Product({ product, index }) {
@@ -56,8 +93,15 @@ function Product({ product, index }) {
 }
 
 export function App({ pathname = typeof window === "undefined" ? "/" : window.location.pathname }) {
+  const supportDialog = useRef(null);
   const currentPath = pathname.replace(/(?:\/index)?\.html$/, "").replace(/\/+$/, "") || "/";
   const legalPage = legalPages[currentPath];
+
+  function openSupport(event) {
+    if (event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+    supportDialog.current?.showModal();
+    // Preserve the anchor's native mailto action; the dialog also works when a browser has no mail handler.
+  }
 
   useEffect(() => {
     document.title = legalPage ? `${legalPage.title} — ByteApps Studio` : "ByteApps Studio — Thoughtful apps for Mac";
@@ -69,7 +113,7 @@ export function App({ pathname = typeof window === "undefined" ? "/" : window.lo
       <header className="topbar">
         <a className="wordmark" href={legalPage ? "/" : "#top"} aria-label="ByteApps Studio home">ByteApps <span>Studio</span></a>
         <nav className="topnav" aria-label="Main navigation">
-          <a href={legalPage ? "/#apps" : "#apps"}>Apps</a><a href={legalPage ? "/#studio" : "#studio"}>Studio</a><SupportLink />
+          <a href={legalPage ? "/#apps" : "#apps"}>Apps</a><a href={legalPage ? "/#studio" : "#studio"}>Studio</a><SupportLink onClick={openSupport} />
         </nav>
       </header>
 
@@ -100,7 +144,7 @@ export function App({ pathname = typeof window === "undefined" ? "/" : window.lo
           <div className="studio-copy">
             <p>We are a small independent software studio in Shenzhen. We design, build, and support every app ourselves, with a simple standard: each product should solve a real everyday problem and feel at home on Apple devices.</p>
             <p>We value useful features, respectful privacy, and steady improvements shaped by the people who use our apps.</p>
-            <a href="mailto:support@byteapps.studio">Talk to the studio <Arrow /></a>
+            <SupportLink onClick={openSupport}>Talk to the studio <Arrow /></SupportLink>
           </div>
         </section>
       </main>}
@@ -108,11 +152,11 @@ export function App({ pathname = typeof window === "undefined" ? "/" : window.lo
       <footer>
         <div><a className="wordmark wordmark--footer" href={legalPage ? "/" : "#top"}>ByteApps <span>Studio</span></a><p>Thoughtful apps for Mac.</p></div>
         <div className="footer-navigation">
-          <nav className="footer-links" aria-label="Studio links"><a href={legalPage ? "/#apps" : "#apps"}>Apps</a><a href="https://apps.apple.com/us/developer/shenzhen-chengsi-technology-co-ltd/id1675893924" target="_blank" rel="noreferrer">App Store</a><SupportLink /></nav>
           <LegalLinks currentPath={currentPath} />
         </div>
         <p className="copyright">© 2026 Shenzhen Chengsi Technology Co., Ltd.</p>
       </footer>
+      <SupportDialog dialogRef={supportDialog} />
     </div>
   );
 }

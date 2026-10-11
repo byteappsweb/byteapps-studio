@@ -9,8 +9,10 @@
 ## Product direction
 
 - The website and local project name is ByteApps Studio. The support email is `support@byteapps.studio`. DeskWidgets links to `https://www.deskwidgets.com/` and Desktop Organizer links to `https://www.desktoporganizer.app/`.
-- Header and footer Support links must open the visitor's default email client with `support@byteapps.studio` as the recipient. Keep both links consistent using the shared support email and the subject `ByteApps Studio Support`.
+- The footer contains the three legal policy links; do not include Apps, App Store, or Support navigation there.
+- Header Support and Talk to the studio share the support email `support@byteapps.studio` and subject `ByteApps Studio Support`. Attempt the visitor's default email client and show a contact dialog with webmail and copy-address options so browsers without a mail handler still respond to the click.
 - Terms of Service (`/terms`), Privacy Policy (`/privacy`), and Refund Policy (`/refunds`) are studio-wide policies for all current and future ByteApps Studio apps. Use `support@byteapps.studio` consistently for every legal, privacy, refund, and support contact. Keep all three links accessible from the website footer and each policy page.
+- Keep `/pricing` accessible from the header and footer and render it as standalone HTML for domain review. List only DeskWidgets and Desktop Organizer. Prices are in CNY: DeskWidgets lifetime ¥168.00, annual ¥78.00, monthly ¥8.00; Desktop Organizer lifetime ¥128.00, annual ¥58.00, monthly ¥6.00. Annual plans have a 7-day free trial and monthly plans a 3-day free trial. Lifetime plans are one-time purchases. Keep billing and renewal terms explicit; website checkout requires a separate payment integration.
 - The site is now the ByteApps Studio portfolio rather than a single-product landing page. Lead with the independent studio and showcase DeskWidgets, Desktop Organizer, and Desktop for Gmail +Google Apps using real product imagery. Do not list ClearToday on the studio site.
 - Keep the public product split accurate: DeskWidgets, Desktop Organizer, and Desktop for Gmail +Google Apps are Mac apps.
 - Product screenshots must fill their visual frames edge to edge on desktop and mobile; do not add colored left or right gutters around the screenshots.
