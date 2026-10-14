@@ -1,5 +1,8 @@
 import { useEffect, useRef, useState } from "react";
 import { LegalLinks, LegalPage, legalPages, SUPPORT_EMAIL } from "./LegalPages.jsx";
+import { PricingPage, pricingPage } from "./PricingPage.jsx";
+import { GmailPage, gmailPage } from "./GmailPage.jsx";
+import { ProductPage, productPages } from "./ProductPages.jsx";
 
 const products = [
   {
@@ -7,21 +10,23 @@ const products = [
     tagline: "A more useful, more personal Mac desktop.",
     description: "Interactive widgets for notes, to-dos, reminders, files, calendars, timers, system stats, and the small things you want within reach.",
     icon: "/assets/products/deskwidgets-icon.png", screenshot: "/assets/products/deskwidgets-shot.jpg", accent: "violet",
-    href: "https://www.deskwidgets.com/", action: "Visit website",
+    href: "/deskwidgets", action: "Explore the app", websiteHref: "https://www.deskwidgets.com/",
+    appStoreHref: "https://apps.apple.com/us/app/deskwidgets-desktop-widgets/id6446226257?mt=12",
   },
   {
     id: "organizer", platform: "macOS", name: "Desktop Organizer",
     tagline: "Give every file a place on your desktop.",
     description: "Create flexible File Zones and App Zones, keep everyday items visible, and launch what you need without digging through folders.",
     icon: "/assets/products/organizer-icon.png", screenshot: "/assets/products/organizer-shot.jpg", accent: "orange",
-    href: "https://www.desktoporganizer.app/", action: "Visit website",
+    href: "/desktop-organizer", action: "Explore the app", websiteHref: "https://www.desktoporganizer.app/",
+    appStoreHref: "https://apps.apple.com/us/app/desktop-organizer-file-zones/id6504022609?mt=12",
   },
   {
     id: "gmail", platform: "macOS", name: "Desktop for Gmail +Google Apps",
     tagline: "Your Google day, in one focused Mac app.",
     description: "Keep Gmail, Calendar, Tasks, Drive, Docs, Sheets, and Slides together—with multiple accounts, organized downloads, PDF export, and menu bar access.",
     icon: "/assets/products/gmail-google-apps-icon.png", screenshot: "/assets/products/gmail-shot.webp", accent: "red",
-    href: "mailto:support@byteapps.studio?subject=Desktop%20for%20Gmail%20%2BGoogle%20Apps", action: "Coming soon — contact us",
+    href: gmailPage.path, action: "Explore the app",
   },
 ];
 
@@ -56,7 +61,7 @@ function SupportDialog({ dialogRef }) {
       <button className="support-close" type="button" aria-label="Close support" onClick={() => dialogRef.current.close()}>×</button>
       <p className="kicker">ByteApps Studio</p>
       <h2 id="support-title">Here to help.</h2>
-      <p id="support-description">If your mail app didn't open, email us using one of the options below.</p>
+      <p id="support-description">Choose your mail app, use webmail, or copy our email address below.</p>
       <a className="support-address" href={SUPPORT_MAILTO}>{SUPPORT_EMAIL}</a>
       <div className="support-actions">
         <a className="support-primary" href={SUPPORT_MAILTO}>Open mail app <Arrow /></a>
@@ -76,8 +81,8 @@ function Product({ product, index }) {
       <div className="product-copy">
         <div className="product-number">0{index + 1}</div>
         <div className="product-heading">
-          <img className="product-icon" src={product.icon} alt={`${product.name} app icon`} />
-          <div><p className="platform">{product.platform}</p><h3>{product.name}</h3></div>
+          <a href={product.href} aria-label={product.name}><img className="product-icon" src={product.icon} alt="" /></a>
+          <div><p className="platform">{product.platform}</p><h3><a href={product.href}>{product.name}</a></h3></div>
         </div>
         <p className="product-tagline">{product.tagline}</p>
         <p className="product-description">{product.description}</p>
@@ -96,6 +101,12 @@ export function App({ pathname = typeof window === "undefined" ? "/" : window.lo
   const supportDialog = useRef(null);
   const currentPath = pathname.replace(/(?:\/index)?\.html$/, "").replace(/\/+$/, "") || "/";
   const legalPage = legalPages[currentPath];
+  const isPricing = currentPath === "/pricing";
+  const isGmail = currentPath === gmailPage.path;
+  const productPage = productPages[currentPath];
+  const isProduct = isGmail || Boolean(productPage);
+  const isHome = !legalPage && !isPricing && !isProduct;
+  const page = legalPage || (isPricing ? pricingPage : isGmail ? gmailPage : productPage);
 
   function openSupport(event) {
     if (event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
@@ -104,20 +115,20 @@ export function App({ pathname = typeof window === "undefined" ? "/" : window.lo
   }
 
   useEffect(() => {
-    document.title = legalPage ? `${legalPage.title} — ByteApps Studio` : "ByteApps Studio — Thoughtful apps for Mac";
-    if (legalPage) document.querySelector('meta[name="description"]')?.setAttribute("content", legalPage.description);
-  }, [legalPage]);
+    document.title = page ? `${page.title} — ByteApps Studio` : "ByteApps Studio — Thoughtful apps for Mac";
+    if (page) document.querySelector('meta[name="description"]')?.setAttribute("content", page.description);
+  }, [page]);
 
   return (
-    <div className="site-shell">
+    <div className={`site-shell${isProduct ? " site-shell--detail" : ""}`}>
       <header className="topbar">
-        <a className="wordmark" href={legalPage ? "/" : "#top"} aria-label="ByteApps Studio home">ByteApps <span>Studio</span></a>
+        <a className="wordmark" href={isHome ? "#top" : "/"} aria-label="ByteApps Studio home">{isProduct && <img className="detail-brand-icon" src="/assets/products/gmail-google-apps-icon.png" alt="" width="30" height="30" />}ByteApps <span>Studio</span></a>
         <nav className="topnav" aria-label="Main navigation">
-          <a href={legalPage ? "/#apps" : "#apps"}>Apps</a><a className="nav-studio" href={legalPage ? "/#studio" : "#studio"}>Studio</a><SupportLink onClick={openSupport} />
+          <a href={isHome ? "#apps" : "/#apps"}>Apps</a><a href="/pricing" aria-current={isPricing ? "page" : undefined}>Pricing</a><a className="nav-studio" href={isHome ? "#studio" : "/#studio"}>Studio</a><SupportLink onClick={openSupport} />
         </nav>
       </header>
 
-      {legalPage ? <LegalPage page={legalPage} pathname={currentPath} /> : <main id="top">
+      {legalPage ? <LegalPage page={legalPage} pathname={currentPath} /> : isPricing ? <PricingPage products={products} /> : isGmail ? <GmailPage product={products.find((product) => product.id === "gmail")} onSupport={openSupport} /> : productPage ? <ProductPage page={productPage} product={products.find((product) => product.id === productPage.productId)} onSupport={openSupport} /> : <main id="top">
         <section className="hero" aria-labelledby="hero-title">
           <p className="eyebrow"><span /> Independent studio · Shenzhen</p>
           <h1 id="hero-title">Small apps.<br /><em>Thoughtfully made.</em></h1>
@@ -126,7 +137,7 @@ export function App({ pathname = typeof window === "undefined" ? "/" : window.lo
             <a href="#apps">Meet our apps <span aria-hidden="true">↓</span></a>
           </div>
           <div className="app-rail" aria-label="ByteApps products">
-            {products.map((product) => <a href={`#${product.id}`} key={product.id}><img src={product.icon} alt="" /><span>{product.name}</span></a>)}
+            {products.map((product) => <a href={product.href} key={product.id}><img src={product.icon} alt="" /><span>{product.name}</span></a>)}
           </div>
         </section>
 
@@ -150,7 +161,7 @@ export function App({ pathname = typeof window === "undefined" ? "/" : window.lo
       </main>}
 
       <footer>
-        <div><a className="wordmark wordmark--footer" href={legalPage ? "/" : "#top"}>ByteApps <span>Studio</span></a><p>Thoughtful apps for Mac.</p></div>
+        <div><a className="wordmark wordmark--footer" href={isHome ? "#top" : "/"}>ByteApps <span>Studio</span></a><p>Thoughtful apps for Mac.</p></div>
         <div className="footer-navigation">
           <LegalLinks currentPath={currentPath} />
         </div>

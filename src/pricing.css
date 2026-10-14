@@ -1,0 +1,80 @@
+.topnav a[aria-current="page"] { color: #b73508; }
+.pricing-page { width: min(1180px, calc(100% - 64px)); margin: 0 auto; padding: 84px 0 90px; }
+.pricing-heading { padding-bottom: 54px; }
+.pricing-heading .kicker { color: #b73508; }
+.pricing-heading h1 { margin: 28px 0 26px; font-size: clamp(56px, 7vw, 96px); line-height: .98; letter-spacing: -.065em; }
+.pricing-intro { margin: 0; max-width: 600px; color: var(--muted); font-size: 21px; line-height: 1.6; }
+.pricing-app-links { display: flex; flex-wrap: wrap; gap: 14px 32px; margin-top: 36px; }
+.pricing-app-links a { display: flex; align-items: center; gap: 12px; padding: 10px 0; font-size: 15px; font-weight: 650; }
+.pricing-app-links a:hover { color: #b73508; }
+.pricing-app-links img { border-radius: 8px; }
+.pricing-app-links a > span { margin-left: 4px; color: var(--muted); }
+.pricing-currency-note { margin: 22px 0 0; color: var(--muted); font-size: 13px; line-height: 1.7; }
+.pricing-product { border-top: 1px solid var(--line); padding: 48px 0 52px; scroll-margin-top: 28px; }
+.pricing-product-heading { display: flex; justify-content: space-between; align-items: center; gap: 32px; }
+.pricing-product-identity { display: flex; align-items: center; gap: 18px; }
+.pricing-product-identity > img { flex-shrink: 0; border-radius: 15px; }
+.pricing-product-identity .platform { color: var(--muted); margin-bottom: 8px; font-size: 11px; }
+.pricing-product-identity h2 { margin: 0; font-size: clamp(26px, 3vw, 36px); line-height: 1.1; letter-spacing: -.045em; }
+.pricing-product-tagline { margin: 0; max-width: 270px; color: var(--muted); font-size: 16px; line-height: 1.6; }
+.pricing-features { display: flex; flex-wrap: wrap; gap: 12px 26px; margin: 28px 0 30px; padding: 0; list-style: none; }
+.pricing-features li { display: flex; gap: 8px; color: #515158; font-size: 14px; line-height: 1.5; }
+.pricing-features li > span { color: #b73508; }
+.pricing-plans { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px; }
+.pricing-plan { background: #fff; border: 1px solid var(--line); border-radius: 18px; padding: 28px; }
+.pricing-plan--lifetime { background: #fff6ef; border-color: #e79c7a; }
+.pricing-badge { display: inline-block; color: #515158; font-size: 12px; font-weight: 650; line-height: 1.5; }
+.pricing-plan--lifetime .pricing-badge { color: #b73508; }
+.pricing-plan h3 { margin: 16px 0 24px; font-size: 25px; letter-spacing: -.035em; }
+.pricing-amount { margin: 0; display: flex; flex-wrap: wrap; align-items: baseline; font-size: clamp(34px, 3.4vw, 44px); font-weight: 760; line-height: 1.15; letter-spacing: -.055em; font-variant-numeric: tabular-nums; }
+.pricing-currency { font-size: .65em; margin-right: 2px; }
+.pricing-period { margin: 8px 0 0 8px; font-size: 13px; font-weight: 500; letter-spacing: 0; color: var(--muted); white-space: nowrap; }
+.pricing-plan-detail { margin: 18px 0 12px; font-size: 14px; font-weight: 650; }
+.pricing-billing { margin: 0; min-height: 66px; color: var(--muted); font-size: 13px; line-height: 1.7; }
+.pricing-product-action { display: flex; align-items: center; gap: 22px; margin-top: 24px; }
+.pricing-get-app { display: inline-flex; align-items: center; justify-content: center; gap: 18px; min-height: 46px; padding: 12px 20px; background: var(--ink); color: white; border-radius: 8px; font-size: 14px; font-weight: 650; }
+.pricing-get-app:hover { background: #38383c; }
+.pricing-product-action > p { margin: 0; color: var(--muted); font-size: 13px; line-height: 1.6; }
+.pricing-questions { padding: 54px 0 64px; border-top: 1px solid var(--line); display: grid; grid-template-columns: 1fr 1.3fr; gap: 68px; }
+.pricing-questions .kicker { color: #b73508; }
+.pricing-questions h2 { margin: 22px 0 0; font-size: clamp(32px, 4vw, 48px); line-height: 1.06; letter-spacing: -.05em; }
+.pricing-faq details { border-bottom: 1px solid var(--line); padding: 22px 0; }
+.pricing-faq details:first-child { padding-top: 0; }
+.pricing-faq summary { cursor: pointer; font-size: 16px; font-weight: 650; line-height: 1.5; }
+.pricing-faq summary:focus-visible { outline: 2px solid #b73508; outline-offset: 5px; }
+.pricing-faq details p { margin: 16px 0 0; color: #515158; font-size: 14px; line-height: 1.8; }
+.pricing-faq a, .pricing-help p a { text-decoration: underline; text-underline-offset: 3px; }
+.pricing-help { display: flex; justify-content: space-between; align-items: center; gap: 32px; border-top: 1px solid var(--line); padding-top: 36px; }
+.pricing-help h2 { margin: 0 0 12px; font-size: 23px; letter-spacing: -.035em; }
+.pricing-help p { margin: 0; color: var(--muted); font-size: 14px; line-height: 1.8; }
+.pricing-help p a { overflow-wrap: anywhere; }
+
+@media (max-width: 1000px) {
+  .pricing-plan { padding: 24px 20px; }
+  .pricing-period { flex-basis: 100%; margin-left: 0; }
+}
+@media (max-width: 700px) {
+  .pricing-page { width: calc(100% - 36px); padding: 52px 0 60px; }
+  .pricing-heading { padding-bottom: 34px; }
+  .pricing-heading h1 { font-size: clamp(50px, 11vw, 72px); }
+  .pricing-intro { font-size: 18px; }
+  .pricing-app-links { gap: 6px 22px; margin-top: 26px; }
+  .pricing-product { padding: 34px 0 38px; }
+  .pricing-product-heading { display: block; }
+  .pricing-product-identity > img { width: 52px; height: 52px; border-radius: 12px; }
+  .pricing-product-tagline { max-width: none; margin-top: 20px; }
+  .pricing-features { display: grid; gap: 10px; margin: 22px 0; }
+  .pricing-plans { grid-template-columns: minmax(0, 1fr); gap: 14px; }
+  .pricing-plan { padding: 24px; }
+  .pricing-plan h3 { margin: 12px 0 20px; }
+  .pricing-amount { font-size: 42px; }
+  .pricing-period { flex-basis: auto; margin-left: 8px; }
+  .pricing-billing { min-height: 0; }
+  .pricing-product-action { flex-wrap: wrap; gap: 14px; }
+  .pricing-questions { grid-template-columns: minmax(0, 1fr); gap: 32px; padding: 38px 0; }
+  .pricing-help { flex-direction: column; align-items: flex-start; gap: 24px; }
+}
+@media (max-width: 480px) {
+  .topbar { height: auto; min-height: 74px; padding: 20px 0 16px; flex-wrap: wrap; gap: 16px; }
+  .topnav { width: 100%; gap: 24px; }
+}

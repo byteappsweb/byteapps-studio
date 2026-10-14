@@ -2,6 +2,8 @@ import React from "react";
 import { createRoot, hydrateRoot } from "react-dom/client";
 import { App } from "./App.jsx";
 import "./styles.css";
+import "./pricing.css";
+import "./product.css";
 
 const app = (
   <React.StrictMode>
