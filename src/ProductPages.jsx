@@ -1,4 +1,5 @@
 import { ProductContact } from "./ProductContact.jsx";
+import { ProductFeatures, ProductIdentity } from "./ProductOverview.jsx";
 
 export const productPages = {
   "/deskwidgets": {
@@ -8,8 +9,8 @@ export const productPages = {
     accent: "#6241c6",
     intro: "Put notes, tasks, calendars, and everyday tools right on your desktop. Choose the widgets you need and make them your own.",
     compatibility: "Requires macOS 12.4 or later",
-    featureEyebrow: "Useful at a glance. Ready for a click.",
-    featureTitle: <>Everyday tools.<br />Right where you need them.</>,
+    screenshot: "/assets/products/deskwidgets-detail.jpg",
+    featureTitle: "Useful tools, right on your desktop.",
     features: [
       ["Notes & to-dos", "Write a quick note and keep your next tasks visible while you work."],
       ["Calendars & reminders", "See your schedule and keep important reminders close to your desktop."],
@@ -26,8 +27,8 @@ export const productPages = {
     accent: "#b84a12",
     intro: "Bring order to a busy desktop with File Zones and App Zones. Group what belongs together, keep it in view, and get back to your work.",
     compatibility: "Requires macOS 12.0 or later",
-    featureEyebrow: "A place for everything you use",
-    featureTitle: <>Less desktop clutter.<br />More room to work.</>,
+    screenshot: "/assets/products/organizer-detail.jpg",
+    featureTitle: "A place for your files and apps.",
     features: [
       ["File Zones", "Group files and folders into dedicated areas, with room for each project."],
       ["App Zones", "Keep frequently used apps together and launch them from your desktop."],
@@ -41,11 +42,9 @@ export const productPages = {
 
 export function ProductPage({ page, product, onSupport }) {
   return <main className="detail-page detail-page--app" id="top" style={{ "--product-accent": page.accent }}>
-    <div className="detail-breadcrumb"><a href="/#apps">← All apps</a><span>A ByteApps Studio app</span></div>
+    <div className="detail-breadcrumb"><a href="/#apps">← All apps</a></div>
     <section className="detail-hero" aria-labelledby="detail-title">
-      <img className="detail-app-icon" src={product.icon} width="88" height="88" alt="" />
-      <p className="detail-eyebrow">Made for your Mac</p>
-      <h1 id="detail-title">{product.name}</h1>
+      <ProductIdentity product={product} />
       <p className="detail-tagline">{product.tagline}</p>
       <p className="detail-intro">{page.intro}</p>
       <div className="detail-actions">
@@ -53,17 +52,10 @@ export function ProductPage({ page, product, onSupport }) {
         <a className="detail-text-link" href={product.websiteHref} target="_blank" rel="noopener noreferrer">Visit product website <span aria-hidden="true">↗</span></a>
       </div>
       <p className="detail-availability">For Mac · Free download with in-app purchases</p>
-      <img className="detail-product-shot" src={product.screenshot} alt={`${product.name} showing its desktop workspace`} width="800" height="500" fetchPriority="high" />
+      <img className="detail-product-shot" src={page.screenshot} alt={`${product.name} showing its desktop workspace`} width="1600" height="1000" fetchPriority="high" />
       <div className="detail-preview-caption"><span>{page.compatibility}</span><a className="detail-text-link" href="#features">Explore the features <span aria-hidden="true">↓</span></a></div>
     </section>
-    <section className="detail-features" id="features" aria-labelledby="detail-features-title">
-      <div className="detail-section-heading"><p className="detail-eyebrow">{page.featureEyebrow}</p><h2 id="detail-features-title">{page.featureTitle}</h2></div>
-      <div className="detail-feature-grid">
-        {page.features.map(([title, description], index) => <article className="detail-feature" key={title}>
-          <span className="detail-feature-number" aria-hidden="true">0{index + 1}</span><h3>{title}</h3><p>{description}</p>
-        </article>)}
-      </div>
-    </section>
+    <ProductFeatures title={page.featureTitle} features={page.features} />
     <ProductContact onSupport={onSupport} />
   </main>;
 }

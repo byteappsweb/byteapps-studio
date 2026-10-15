@@ -124,7 +124,7 @@ export function App({ pathname = typeof window === "undefined" ? "/" : window.lo
       <header className="topbar">
         <a className="wordmark" href={isHome ? "#top" : "/"} aria-label="ByteApps Studio home">{isProduct && <img className="detail-brand-icon" src="/assets/products/gmail-google-apps-icon.png" alt="" width="30" height="30" />}ByteApps <span>Studio</span></a>
         <nav className="topnav" aria-label="Main navigation">
-          <a href={isHome ? "#apps" : "/#apps"}>Apps</a><a href="/pricing" aria-current={isPricing ? "page" : undefined}>Pricing</a><a className="nav-studio" href={isHome ? "#studio" : "/#studio"}>Studio</a><SupportLink onClick={openSupport} />
+          <a className="nav-apps" href={isHome ? "#apps" : "/#apps"}>Apps</a><a href="/pricing" aria-current={isPricing ? "page" : undefined}>Pricing</a><a className="nav-studio" href={isHome ? "#studio" : "/#studio"}>Studio</a><SupportLink onClick={openSupport} />
         </nav>
       </header>
 

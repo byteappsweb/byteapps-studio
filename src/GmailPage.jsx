@@ -1,4 +1,5 @@
 import { ProductContact } from "./ProductContact.jsx";
+import { ProductFeatures, ProductIdentity } from "./ProductOverview.jsx";
 
 export const gmailPage = {
   path: "/desktop-for-gmail",
@@ -18,12 +19,10 @@ const features = [
 export function GmailPage({ product, onSupport }) {
   return (
     <main className="detail-page" id="top">
-      <div className="detail-breadcrumb"><a href="/#apps">← All apps</a><span>A ByteApps Studio app</span></div>
+      <div className="detail-breadcrumb"><a href="/#apps">← All apps</a></div>
 
       <section className="detail-hero" aria-labelledby="detail-title">
-        <img className="detail-app-icon" src={product.icon} width="88" height="88" alt="" />
-        <p className="detail-eyebrow">Made for your Mac</p>
-        <h1 id="detail-title">Desktop for Gmail<br /><span>+Google Apps</span></h1>
+        <ProductIdentity product={product} />
         <p className="detail-tagline">Your Google day, in one focused Mac app.</p>
         <p className="detail-intro">Mail, meetings, tasks, and documents. Bring them together in one window, with the Mac features that make your day easier.</p>
         <div className="detail-actions">
@@ -38,23 +37,12 @@ export function GmailPage({ product, onSupport }) {
         <p className="detail-demo-note">Product previews use demo content.</p>
       </section>
 
-      <section className="detail-features" id="features" aria-labelledby="detail-features-title">
-        <div className="detail-section-heading">
-          <p className="detail-eyebrow">Less switching. More doing.</p>
-          <h2 id="detail-features-title">A familiar workspace.<br />A better fit for your Mac.</h2>
-        </div>
-        <div className="detail-feature-grid">
-          {features.map(([title, description], index) => <article className="detail-feature" key={title}>
-            <span className="detail-feature-number" aria-hidden="true">0{index + 1}</span>
-            <h3>{title}</h3><p>{description}</p>
-          </article>)}
-        </div>
-      </section>
+      <ProductFeatures title="Google tools. Mac conveniences." features={features} />
 
       <section className="detail-workspace" aria-labelledby="detail-workspace-title">
         <div className="detail-workspace-copy">
           <p className="detail-eyebrow">Beyond the inbox</p>
-          <h2 id="detail-workspace-title">Make room for<br />the rest of your day.</h2>
+          <h2 id="detail-workspace-title">Your calendar, close at hand.</h2>
           <p>Check your calendar, catch up on tasks, and open your Google files. Your everyday tools share a home, so the next thing is always within reach.</p>
           <p className="detail-service-list">Gmail · Calendar · Tasks · Drive · Docs · Sheets · Slides</p>
         </div>
