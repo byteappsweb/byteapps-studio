@@ -34,6 +34,15 @@ const Arrow = () => <span aria-hidden="true">↗</span>;
 const SUPPORT_SUBJECT = "ByteApps Studio Support";
 const SUPPORT_MAILTO = `mailto:${SUPPORT_EMAIL}?subject=${encodeURIComponent(SUPPORT_SUBJECT)}`;
 
+function StudioBrand({ href, footer = false }) {
+  return (
+    <a className={`wordmark${footer ? " wordmark--footer" : ""}`} href={href} aria-label="ByteApps Studio home">
+      <img className="brand-icon" src="/assets/brand/byteapps-orange-256.png" alt="" width="36" height="36" />
+      <span className="brand-name">ByteApps <span>Studio</span></span>
+    </a>
+  );
+}
+
 function SupportLink({ onClick, children = "Support" }) {
   return <a href={SUPPORT_MAILTO} onClick={onClick} title={`Email ${SUPPORT_EMAIL}`}>{children}</a>;
 }
@@ -81,7 +90,7 @@ function Product({ product, index }) {
       <div className="product-copy">
         <div className="product-number">0{index + 1}</div>
         <div className="product-heading">
-          <a href={product.href} aria-label={product.name}><img className="product-icon" src={product.icon} alt="" /></a>
+          <a className="product-icon-link" href={product.href} aria-label={product.name}><img className="product-icon" src={product.icon} alt="" /></a>
           <div><p className="platform">{product.platform}</p><h3><a href={product.href}>{product.name}</a></h3></div>
         </div>
         <p className="product-tagline">{product.tagline}</p>
@@ -122,7 +131,7 @@ export function App({ pathname = typeof window === "undefined" ? "/" : window.lo
   return (
     <div className={`site-shell${isProduct ? " site-shell--detail" : ""}`}>
       <header className="topbar">
-        <a className="wordmark" href={isHome ? "#top" : "/"} aria-label="ByteApps Studio home">{isProduct && <img className="detail-brand-icon" src="/assets/products/gmail-google-apps-icon.png" alt="" width="30" height="30" />}ByteApps <span>Studio</span></a>
+        <StudioBrand href={isHome ? "#top" : "/"} />
         <nav className="topnav" aria-label="Main navigation">
           <a className="nav-apps" href={isHome ? "#apps" : "/#apps"}>Apps</a><a href="/pricing" aria-current={isPricing ? "page" : undefined}>Pricing</a><a className="nav-studio" href={isHome ? "#studio" : "/#studio"}>Studio</a><SupportLink onClick={openSupport} />
         </nav>
@@ -161,7 +170,7 @@ export function App({ pathname = typeof window === "undefined" ? "/" : window.lo
       </main>}
 
       <footer>
-        <div><a className="wordmark wordmark--footer" href={isHome ? "#top" : "/"}>ByteApps <span>Studio</span></a><p>Thoughtful apps for Mac.</p></div>
+        <div><StudioBrand href={isHome ? "#top" : "/"} footer /><p>Thoughtful apps for Mac.</p></div>
         <div className="footer-navigation">
           <LegalLinks currentPath={currentPath} />
         </div>

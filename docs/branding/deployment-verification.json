@@ -1,0 +1,60 @@
+{
+  "domain": "https://byteapps.studio",
+  "deployment": "https://9323f397.byteapps-studio.pages.dev",
+  "pages": [
+    {
+      "route": "/",
+      "orange_brand_count": 2,
+      "current_build": true
+    },
+    {
+      "route": "/pricing",
+      "orange_brand_count": 2,
+      "current_build": true
+    },
+    {
+      "route": "/deskwidgets",
+      "orange_brand_count": 2,
+      "current_build": true
+    },
+    {
+      "route": "/desktop-organizer",
+      "orange_brand_count": 2,
+      "current_build": true
+    },
+    {
+      "route": "/desktop-for-gmail",
+      "orange_brand_count": 2,
+      "current_build": true
+    },
+    {
+      "route": "/terms",
+      "orange_brand_count": 2,
+      "current_build": true
+    },
+    {
+      "route": "/privacy",
+      "orange_brand_count": 2,
+      "current_build": true
+    },
+    {
+      "route": "/refunds",
+      "orange_brand_count": 2,
+      "current_build": true
+    }
+  ],
+  "assets": [
+    {
+      "asset": "byteapps-orange-256.png",
+      "matches_local": true
+    },
+    {
+      "asset": "byteapps-orange-32.png",
+      "matches_local": true
+    },
+    {
+      "asset": "byteapps-orange-180.png",
+      "matches_local": true
+    }
+  ]
+}

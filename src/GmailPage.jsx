@@ -30,10 +30,7 @@ export function GmailPage({ product, onSupport }) {
           <a className="detail-text-link" href="#features">Explore the features <span aria-hidden="true">↓</span></a>
         </div>
         <p className="detail-availability">Coming soon for macOS</p>
-        <div className="detail-window-stack">
-          <img className="detail-window-back" src="/assets/office-window.webp" alt="" width="1600" height="788" aria-hidden="true" />
-          <img className="detail-window-front" src={product.screenshot} alt="Desktop for Gmail showing a demo inbox and a Tasks sidebar in a native Mac window" width="1600" height="891" fetchPriority="high" />
-        </div>
+        <img className="detail-product-shot" src={product.screenshot} alt="Desktop for Gmail showing a demo inbox and a Tasks sidebar in a native Mac window" width="1600" height="891" fetchPriority="high" />
         <p className="detail-demo-note">Product previews use demo content.</p>
       </section>
 
